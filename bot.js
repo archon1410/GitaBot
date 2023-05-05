@@ -5,11 +5,11 @@ const client = new Discord.Client();
 
 const data = require('./verse.json');
 
-client.on('ready', function() {
-  console.log('Logged in as ' + client.user.tag + '!');
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', function(message) {
+client.on('message', message => {
   if (message.author.bot) return; // Ignore messages from bots
   if (!message.content.startsWith('Gita')) return; // Ignore messages that don't start with 'Gita'
 
@@ -28,7 +28,7 @@ client.on('message', function(message) {
     const start = chapter === chapterStart ? verseStart : 1;
     const end = chapter === chapterEnd ? verseEnd : Object.keys(data[chapter]).length;
     for (let verse = start; verse <= end; verse++) {
-      response += '**Chapter ' + chapter + ', Verse ' + verse + ':**\n' + data[chapter][verse] + '\n\n';
+      response += `**Chapter ${chapter}, Verse ${verse}:**\n${data[chapter][verse]}\n\n`;
     }
   }
 
